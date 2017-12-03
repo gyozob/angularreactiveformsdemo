@@ -1,0 +1,80 @@
+<div class="container">
+  <h1>Add user</h1>
+  <select [(ngModel)]="currentFormType" (change)="formTypeChange()" class="form-control">
+    <option *ngFor="let item of formTypeList" title="item.label" [ngValue]="item.value">{{item.label}}</option>
+  </select>
+  <form [(formGroup)]="form" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="">First Name</label>
+      <input type="text" class="form-control" formControlName="FirstName">
+      <div *ngIf="form.controls.FirstName.invalid && (form.controls.FirstName.dirty || form.controls.FirstName.touched)">
+        <small *ngIf="form.controls.FirstName.errors.maxlength != null" class="text-danger">
+              First name must be at most {{form.controls.FirstName.errors.maxlength.requiredLength}} characters long.
+        </small>
+        <small *ngIf="form.controls.FirstName.errors.required != null" class="text-danger">
+          First name is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="">Last Name</label>
+      <input type="text" class="form-control" formControlName="LastName">
+      <div *ngIf="form.controls.LastName.invalid && (form.controls.LastName.dirty || form.controls.LastName.touched)">
+        <small *ngIf="form.controls.LastName.errors.maxlength != null" class="text-danger">
+              Last name must be at most {{form.controls.LastName.errors.maxlength.requiredLength}} characters long.
+        </small>
+        <small *ngIf="form.controls.LastName.errors.required != null" class="text-danger">
+          Last name is required.
+        </small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="">Unique personal number</label>
+      <input type="text" class="form-control" formControlName="PersonalIdentifier">
+      <div *ngIf="form.controls.PersonalIdentifier.invalid && (form.controls.PersonalIdentifier.dirty || form.controls.PersonalIdentifier.touched)">
+        <small *ngIf="form.controls.PersonalIdentifier.errors.maxlength != null" class="text-danger">
+              Unique personal number must be at most {{form.controls.PersonalIdentifier.errors.maxlength.requiredLength}} characters long.
+        </small>
+        <small *ngIf="form.controls.PersonalIdentifier.errors.required != null" class="text-danger">
+          Unique personal number is required.
+        </small>
+        <small *ngIf="form.controls.PersonalIdentifier.errors.pattern != null" class="text-danger">
+          Unique personal number must be a number.
+        </small>
+      </div>
+    </div>
+    <div *ngIf="currentFormType==2 || currentFormType==3" class="form-group">
+      <label for="">Company name</label>
+      <input type="text" class="form-control" formControlName="Company">
+      <div *ngIf="form.controls.Company.invalid && (form.controls.Company.dirty || form.controls.Company.touched)">
+        <small *ngIf="form.controls.Company.errors.maxlength != null" class="text-danger">
+              Unique personal number must be at most {{form.controls.Company.errors.maxlength.requiredLength}} characters long.
+        </small>
+        <small *ngIf="form.controls.Company.errors.required != null" class="text-danger">
+          Company name is required.
+        </small>
+      </div>
+      <label for="">Manager</label>
+      <input type="text" class="form-control" formControlName="ManagerId">
+      <div *ngIf="form.controls.ManagerId.invalid && (form.controls.ManagerId.dirty || form.controls.ManagerId.touched)">
+        <small *ngIf="form.controls.ManagerId.errors.pattern != null" class="text-danger">
+              Manager must be a number representing the id of the manager the employee belongs.
+        </small>
+        <small *ngIf="form.controls.ManagerId.errors.required != null" class="text-danger">
+          Manager is required.
+        </small>
+      </div>
+    </div>
+    <div *ngIf="currentFormType==3">
+      <label for="">Department</label>
+      <input type="text" class="form-control" formControlName="Department">
+      <div *ngIf="form.controls.Department.invalid && (form.controls.Department.dirty || form.controls.Department.touched)">
+        <small *ngIf="form.controls.Department.errors.required != null" class="text-danger">
+          Department is required.
+        </small>
+      </div>
+    </div>
+    <button [disabled]="form.invalid" type="submit" class="btn btn-default">Submit</button>
+    <div class="margin-20">{{form.value | json}}</div>
+  </form>
+</div>
