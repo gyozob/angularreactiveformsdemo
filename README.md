@@ -1,4 +1,4 @@
-# Angular reactive forms demo
+# Angular reactive forms demo - WIP
 Because I like angular reactive forms I decided to dedicate a repo to play a little bit with and demo how easy we can:
 - reuse common form parts/fields
 - add/remove field validation based on other fields input
